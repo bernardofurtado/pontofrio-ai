@@ -3,27 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ponto Frio — Busca Inteligente</title>
+  <title>Casas Bahia — Busca Inteligente</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ──────────────────────────────────────────────
-       RESET & TOKENS
-    ────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --gcb-blue:    #0033C6;
-      --gcb-red:     #E31233;
-      --gcb-off:     #F0EFEA;
-      --gcb-dark:    #212121;
-      --gcb-white:   #FFFFFF;
-      --gcb-muted:   #6B7280;
-      --gcb-border:  rgba(0,0,0,0.08);
-      --gcb-shadow:  0 4px 24px rgba(0,0,0,0.10);
-      --gcb-shadow-lg: 0 12px 48px rgba(0,51,198,0.18);
+      --cb-blue:     #0033C6;
+      --cb-yellow:   #FFD100;
+      --cb-red:      #E31233;
+      --cb-off:      #F0EFEA;
+      --cb-dark:     #212121;
+      --cb-white:    #FFFFFF;
+      --cb-muted:    #6B7280;
+      --cb-border:   rgba(0,0,0,0.08);
       --radius-pill: 100px;
       --radius-lg:   20px;
       --radius-md:   14px;
@@ -37,16 +33,13 @@
 
     body {
       font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--gcb-off);
-      color: var(--gcb-dark);
+      background: var(--cb-off);
+      color: var(--cb-dark);
       min-height: 100vh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ──────────────────────────────────────────────
-       NOISE TEXTURE OVERLAY
-    ────────────────────────────────────────────── */
     body::before {
       content: '';
       position: fixed;
@@ -56,45 +49,37 @@
       z-index: 0;
     }
 
-    /* ──────────────────────────────────────────────
-       ANIMATED GRADIENT BG
-    ────────────────────────────────────────────── */
-    .bg-orbs {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      overflow: hidden;
-    }
+    /* ── ORBS ── */
+    .bg-orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 
     .orb {
       position: absolute;
       border-radius: 50%;
       filter: blur(80px);
-      opacity: 0.25;
-      animation: orb-drift 12s ease-in-out infinite;
+      opacity: 0.22;
+      animation: orb-drift 14s ease-in-out infinite;
     }
 
     .orb-1 {
-      width: 600px; height: 600px;
+      width: 580px; height: 580px;
       background: radial-gradient(circle, #0033C6 0%, transparent 70%);
-      top: -200px; left: -200px;
+      top: -180px; left: -180px;
       animation-delay: 0s;
     }
 
     .orb-2 {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, #E31233 0%, transparent 70%);
-      bottom: -150px; right: -150px;
-      animation-delay: -4s;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, #FFD100 0%, transparent 70%);
+      bottom: -120px; right: -120px;
+      animation-delay: -5s;
     }
 
     .orb-3 {
-      width: 400px; height: 400px;
+      width: 360px; height: 360px;
       background: radial-gradient(circle, #0055FF 0%, transparent 70%);
-      top: 50%; left: 50%;
+      top: 55%; left: 50%;
       transform: translate(-50%, -50%);
-      animation-delay: -8s;
+      animation-delay: -10s;
     }
 
     @keyframes orb-drift {
@@ -103,9 +88,7 @@
       66%       { transform: translate(-20px, 40px) scale(0.95); }
     }
 
-    /* ──────────────────────────────────────────────
-       HEADER — GLASSMORPHISM
-    ────────────────────────────────────────────── */
+    /* ── HEADER ── */
     .header {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -117,8 +100,7 @@
       background: rgba(240, 239, 234, 0.72);
       backdrop-filter: var(--blur-glass);
       -webkit-backdrop-filter: var(--blur-glass);
-      border-bottom: 1px solid var(--gcb-border);
-      transition: all 0.3s var(--ease-smooth);
+      border-bottom: 1px solid var(--cb-border);
     }
 
     .header-logo {
@@ -128,11 +110,7 @@
       text-decoration: none;
     }
 
-    /* Ponto Frio logo mark — SVG inline */
-    .logo-mark {
-      width: 36px; height: 36px;
-      flex-shrink: 0;
-    }
+    .logo-mark { width: 38px; height: 38px; flex-shrink: 0; }
 
     .logo-wordmark {
       font-family: 'Urbanist', sans-serif;
@@ -140,82 +118,55 @@
       font-size: 18px;
       letter-spacing: -0.5px;
       line-height: 1;
+      color: var(--cb-blue);
     }
 
-    .logo-wordmark span:first-child {
-      color: var(--gcb-blue);
-    }
+    .logo-wordmark span { color: var(--cb-blue); }
 
-    .logo-wordmark span:last-child {
-      color: var(--gcb-red);
-    }
-
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .header-nav { display: flex; align-items: center; gap: 8px; }
 
     .nav-pill {
-      font-family: 'Roboto', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gcb-dark);
+      font-size: 13px; font-weight: 500;
+      color: var(--cb-dark);
       padding: 7px 14px;
       border-radius: var(--radius-pill);
       text-decoration: none;
       transition: background 0.2s, color 0.2s;
       opacity: 0.75;
     }
-
-    .nav-pill:hover {
-      background: rgba(0,51,198,0.08);
-      color: var(--gcb-blue);
-      opacity: 1;
-    }
+    .nav-pill:hover { background: rgba(0,51,198,0.08); color: var(--cb-blue); opacity: 1; }
 
     .nav-cart {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gcb-white);
-      background: var(--gcb-blue);
-      padding: 8px 16px;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 700;
+      font-family: 'Urbanist', sans-serif;
+      color: var(--cb-dark);
+      background: var(--cb-yellow);
+      padding: 8px 18px;
       border-radius: var(--radius-pill);
       text-decoration: none;
       transition: all 0.25s var(--ease-spring);
-      box-shadow: 0 2px 8px rgba(0,51,198,0.3);
+      box-shadow: 0 2px 8px rgba(255,209,0,0.35);
     }
-
     .nav-cart:hover {
-      background: #0029A8;
+      background: #e6bc00;
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(0,51,198,0.35);
+      box-shadow: 0 6px 20px rgba(255,209,0,0.4);
     }
 
-    /* ──────────────────────────────────────────────
-       MAIN — HERO SECTION
-    ────────────────────────────────────────────── */
+    /* ── MAIN ── */
     .main {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
       padding: 100px 24px 40px;
     }
 
     .hero {
-      width: 100%;
-      max-width: 780px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 40px;
+      width: 100%; max-width: 780px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 40px;
       animation: hero-enter 0.8s var(--ease-spring) both;
     }
 
@@ -224,23 +175,14 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* ──────────────────────────────────────────────
-       HERO HEADLINE
-    ────────────────────────────────────────────── */
-    .hero-headline {
-      text-align: center;
-    }
+    /* ── HEADLINE ── */
+    .hero-headline { text-align: center; }
 
     .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-family: 'Roboto', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--gcb-blue);
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--cb-blue);
       background: rgba(0,51,198,0.07);
       padding: 5px 12px;
       border-radius: var(--radius-pill);
@@ -252,13 +194,13 @@
       content: '';
       width: 6px; height: 6px;
       border-radius: 50%;
-      background: var(--gcb-blue);
+      background: var(--cb-blue);
       animation: pulse-dot 2s ease-in-out infinite;
     }
 
     @keyframes pulse-dot {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.4; transform: scale(0.7); }
+      50%       { opacity: 0.35; transform: scale(0.65); }
     }
 
     .hero-title {
@@ -267,17 +209,17 @@
       font-weight: 800;
       line-height: 1.05;
       letter-spacing: -2px;
-      color: var(--gcb-dark);
+      color: var(--cb-dark);
       margin-bottom: 16px;
     }
 
     .hero-title .gradient-word {
-      background: linear-gradient(135deg, var(--gcb-blue) 0%, #4D7EFF 50%, var(--gcb-red) 100%);
+      background: linear-gradient(135deg, var(--cb-blue) 0%, #1A5CFF 40%, #FFD100 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: gradient-shift 4s ease-in-out infinite;
       background-size: 200% 200%;
+      animation: gradient-shift 4s ease-in-out infinite;
     }
 
     @keyframes gradient-shift {
@@ -286,43 +228,28 @@
     }
 
     .hero-sub {
-      font-size: 17px;
-      font-weight: 300;
-      color: var(--gcb-muted);
-      line-height: 1.6;
-      max-width: 460px;
-      margin: 0 auto;
+      font-size: 17px; font-weight: 300;
+      color: var(--cb-muted); line-height: 1.6;
+      max-width: 460px; margin: 0 auto;
     }
 
-    /* ──────────────────────────────────────────────
-       SEARCH BAR — APPLE STYLE
-    ────────────────────────────────────────────── */
+    /* ── SEARCH BAR ── */
     .search-container {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      display: flex; flex-direction: column; gap: 12px;
       animation: hero-enter 0.8s var(--ease-spring) 0.1s both;
     }
 
     .search-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,0.85);
+      display: flex; align-items: center; gap: 12px;
+      background: rgba(255,255,255,0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1.5px solid rgba(255,255,255,0.9);
+      border: 1.5px solid rgba(255,255,255,0.95);
       border-radius: var(--radius-pill);
       padding: 6px 6px 6px 22px;
-      box-shadow:
-        0 0 0 0 rgba(0,51,198,0),
-        0 8px 32px rgba(0,0,0,0.08),
-        inset 0 1px 0 rgba(255,255,255,0.8);
-      transition:
-        box-shadow 0.3s var(--ease-smooth),
-        border-color 0.3s var(--ease-smooth),
-        transform 0.3s var(--ease-spring);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.8);
+      transition: all 0.3s var(--ease-smooth);
     }
 
     .search-bar:focus-within {
@@ -334,87 +261,49 @@
       transform: translateY(-2px);
     }
 
-    .search-icon {
-      flex-shrink: 0;
-      color: var(--gcb-muted);
-      transition: color 0.25s;
-    }
-
-    .search-bar:focus-within .search-icon {
-      color: var(--gcb-blue);
-    }
+    .search-icon { flex-shrink: 0; color: var(--cb-muted); transition: color 0.25s; }
+    .search-bar:focus-within .search-icon { color: var(--cb-blue); }
 
     .search-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      background: transparent;
+      flex: 1; border: none; outline: none; background: transparent;
       font-family: 'Roboto', sans-serif;
-      font-size: 17px;
-      font-weight: 400;
-      color: var(--gcb-dark);
-      placeholder-color: var(--gcb-muted);
+      font-size: 17px; font-weight: 400; color: var(--cb-dark);
     }
-
-    .search-input::placeholder {
-      color: var(--gcb-muted);
-      opacity: 0.7;
-    }
+    .search-input::placeholder { color: var(--cb-muted); opacity: 0.7; }
 
     .search-btn {
       flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
       font-family: 'Urbanist', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--gcb-white);
-      background: linear-gradient(135deg, var(--gcb-blue) 0%, #1A4DFF 100%);
+      font-weight: 700; font-size: 15px;
+      color: var(--cb-dark);
+      background: var(--cb-yellow);
       border: none;
       border-radius: var(--radius-pill);
       padding: 13px 24px;
       cursor: pointer;
       transition: all 0.25s var(--ease-spring);
-      box-shadow: 0 4px 12px rgba(0,51,198,0.35);
-      position: relative;
-      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(255,209,0,0.4);
+      position: relative; overflow: hidden;
     }
-
     .search-btn::after {
       content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, transparent 100%);
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, transparent 100%);
       border-radius: inherit;
     }
+    .search-btn:hover { transform: scale(1.03); box-shadow: 0 8px 24px rgba(255,209,0,0.5); background: #e6bc00; }
+    .search-btn:active { transform: scale(0.98); }
 
-    .search-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 8px 24px rgba(0,51,198,0.4);
-    }
-
-    .search-btn:active {
-      transform: scale(0.98);
-    }
-
-    /* ──────────────────────────────────────────────
-       QUICK CHIPS
-    ────────────────────────────────────────────── */
+    /* ── CHIPS ── */
     .quick-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
     }
 
     .chip {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--gcb-dark);
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; font-weight: 500;
+      color: var(--cb-dark);
       background: rgba(255,255,255,0.72);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
@@ -426,120 +315,81 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.06);
       user-select: none;
     }
-
     .chip:hover {
-      background: var(--gcb-blue);
-      color: var(--gcb-white);
+      background: var(--cb-blue);
+      color: var(--cb-white);
       border-color: transparent;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,51,198,0.25);
     }
+    .chip-emoji { font-size: 15px; line-height: 1; }
 
-    .chip-emoji {
-      font-size: 15px;
-      line-height: 1;
-    }
-
-    /* ──────────────────────────────────────────────
-       CONVERSATION FEED
-    ────────────────────────────────────────────── */
+    /* ── FEED ── */
     .feed {
-      width: 100%;
-      max-width: 780px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      width: 100%; max-width: 780px;
+      display: flex; flex-direction: column; gap: 16px;
       margin-top: 8px;
     }
 
-    /* Mensagem do usuário */
     .msg-user {
-      align-self: flex-end;
-      max-width: 72%;
-      background: var(--gcb-blue);
-      color: var(--gcb-white);
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 1.5;
+      align-self: flex-end; max-width: 72%;
+      background: var(--cb-blue); color: var(--cb-white);
+      font-size: 15px; font-weight: 400; line-height: 1.5;
       padding: 14px 20px;
       border-radius: 20px 20px 4px 20px;
       box-shadow: 0 4px 16px rgba(0,51,198,0.25);
-      animation: msg-slide-right 0.4s var(--ease-spring) both;
+      animation: msg-r 0.4s var(--ease-spring) both;
     }
 
-    @keyframes msg-slide-right {
+    @keyframes msg-r {
       from { opacity: 0; transform: translateX(20px) scale(0.97); }
       to   { opacity: 1; transform: translateX(0) scale(1); }
     }
 
-    /* Mensagem do assistente */
-    .msg-bot {
-      align-self: flex-start;
-      max-width: 92%;
-      animation: msg-slide-left 0.4s var(--ease-spring) 0.1s both;
-    }
+    .msg-bot { align-self: flex-start; max-width: 92%; animation: msg-l 0.4s var(--ease-spring) 0.1s both; }
 
-    @keyframes msg-slide-left {
+    @keyframes msg-l {
       from { opacity: 0; transform: translateX(-20px) scale(0.97); }
       to   { opacity: 1; transform: translateX(0) scale(1); }
     }
 
-    .msg-bot-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
+    .msg-bot-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
 
     .bot-avatar {
       width: 28px; height: 28px;
       border-radius: 8px;
-      background: linear-gradient(135deg, var(--gcb-blue), var(--gcb-red));
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: linear-gradient(135deg, var(--cb-blue), #FFD100);
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
-    .bot-name {
-      font-family: 'Urbanist', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--gcb-blue);
-    }
+    .bot-name { font-family: 'Urbanist', sans-serif; font-size: 13px; font-weight: 700; color: var(--cb-blue); }
 
     .msg-bot-text {
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.82);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.9);
+      border: 1px solid rgba(255,255,255,0.95);
       border-radius: 4px 20px 20px 20px;
       padding: 16px 20px;
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--gcb-dark);
+      font-size: 15px; line-height: 1.6; color: var(--cb-dark);
       box-shadow: 0 4px 20px rgba(0,0,0,0.07);
     }
 
-    /* ──────────────────────────────────────────────
-       PRODUCT CARDS — APPLE FEEL
-    ────────────────────────────────────────────── */
+    /* ── PRODUCT CARDS ── */
     .products-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
-      width: 100%;
-      margin-top: 6px;
+      gap: 14px; width: 100%; margin-top: 6px;
     }
 
     .product-card {
-      background: rgba(255,255,255,0.82);
+      background: rgba(255,255,255,0.85);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255,255,255,0.95);
       border-radius: var(--radius-lg);
-      overflow: hidden;
-      cursor: pointer;
+      overflow: hidden; cursor: pointer;
       transition: all 0.3s var(--ease-spring);
       box-shadow: 0 4px 16px rgba(0,0,0,0.07);
       animation: card-enter 0.5s var(--ease-spring) both;
@@ -560,131 +410,75 @@
       box-shadow: 0 16px 48px rgba(0,0,0,0.13);
       border-color: rgba(0,51,198,0.2);
     }
-
-    .product-card:active {
-      transform: scale(0.98);
-    }
+    .product-card:active { transform: scale(0.98); }
 
     .card-img-wrap {
       height: 150px;
       background: linear-gradient(135deg, #f5f5f7 0%, #e8e8ed 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; position: relative; overflow: hidden;
     }
-
     .card-img-wrap::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.6) 0%, transparent 60%);
     }
-
     .card-img-wrap img {
-      max-height: 110px;
-      max-width: 100%;
-      object-fit: contain;
-      position: relative;
-      z-index: 1;
+      max-height: 110px; max-width: 100%; object-fit: contain;
+      position: relative; z-index: 1;
       transition: transform 0.4s var(--ease-spring);
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.12));
     }
-
-    .product-card:hover .card-img-wrap img {
-      transform: scale(1.08) translateY(-4px);
-    }
+    .product-card:hover .card-img-wrap img { transform: scale(1.08) translateY(-4px); }
 
     .card-badge {
-      position: absolute;
-      top: 10px; left: 10px;
+      position: absolute; top: 10px; left: 10px;
       font-family: 'Urbanist', sans-serif;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--gcb-white);
-      background: var(--gcb-red);
-      padding: 3px 8px;
-      border-radius: 6px;
-      z-index: 2;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--cb-dark);
+      background: var(--cb-yellow);
+      padding: 3px 8px; border-radius: 6px; z-index: 2;
     }
 
-    .card-body {
-      padding: 14px 16px;
-    }
+    .card-body { padding: 14px 16px; }
 
     .card-name {
       font-family: 'Urbanist', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--gcb-dark);
-      line-height: 1.35;
-      margin-bottom: 8px;
+      font-size: 13px; font-weight: 600;
+      color: var(--cb-dark); line-height: 1.35; margin-bottom: 8px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
 
-    .card-price-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .card-price-old {
-      font-size: 11px;
-      color: var(--gcb-muted);
-      text-decoration: line-through;
-    }
-
+    .card-price-wrap { display: flex; flex-direction: column; gap: 2px; }
+    .card-price-old { font-size: 11px; color: var(--cb-muted); text-decoration: line-through; }
     .card-price {
       font-family: 'Urbanist', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--gcb-blue);
-      letter-spacing: -0.5px;
+      font-size: 18px; font-weight: 800;
+      color: var(--cb-blue); letter-spacing: -0.5px;
     }
-
-    .card-installment {
-      font-size: 11px;
-      color: var(--gcb-muted);
-    }
+    .card-installment { font-size: 11px; color: var(--cb-muted); }
 
     .card-cta {
-      display: block;
-      margin-top: 12px;
-      width: 100%;
+      display: block; margin-top: 12px; width: 100%;
       font-family: 'Urbanist', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--gcb-white);
-      background: var(--gcb-blue);
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: 10px;
-      cursor: pointer;
-      text-align: center;
+      font-size: 13px; font-weight: 700;
+      color: var(--cb-dark);
+      background: var(--cb-yellow);
+      border: none; border-radius: var(--radius-sm);
+      padding: 10px; cursor: pointer; text-align: center;
       transition: all 0.2s var(--ease-spring);
     }
+    .card-cta:hover { background: #e6bc00; transform: scale(1.02); }
 
-    .card-cta:hover {
-      background: #0029A8;
-      transform: scale(1.02);
-    }
-
-    /* ──────────────────────────────────────────────
-       TYPING INDICATOR
-    ────────────────────────────────────────────── */
+    /* ── TYPING ── */
     .typing-indicator {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
       padding: 14px 18px;
-      background: rgba(255,255,255,0.8);
+      background: rgba(255,255,255,0.82);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(255,255,255,0.9);
@@ -695,11 +489,9 @@
 
     .typing-dot {
       width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--gcb-blue);
+      border-radius: 50%; background: var(--cb-blue);
       animation: typing-bounce 1.2s ease-in-out infinite;
     }
-
     .typing-dot:nth-child(2) { animation-delay: 0.15s; }
     .typing-dot:nth-child(3) { animation-delay: 0.30s; }
 
@@ -708,149 +500,83 @@
       50%       { transform: translateY(-5px); opacity: 1; }
     }
 
-    /* ──────────────────────────────────────────────
-       INPUT AREA (bottom, sticky when chat active)
-    ────────────────────────────────────────────── */
+    /* ── INPUT STICKY ── */
     .input-sticky {
-      position: sticky;
-      bottom: 24px;
-      width: 100%;
-      max-width: 780px;
-      margin: 24px auto 0;
+      position: sticky; bottom: 24px;
+      width: 100%; max-width: 780px;
+      margin: 24px auto 0; z-index: 10;
       animation: hero-enter 0.8s var(--ease-spring) 0.2s both;
-      z-index: 10;
     }
 
     .input-bar {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
+      display: flex; align-items: flex-end; gap: 10px;
       background: rgba(255,255,255,0.88);
       backdrop-filter: blur(24px) saturate(1.8);
       -webkit-backdrop-filter: blur(24px) saturate(1.8);
       border: 1.5px solid rgba(255,255,255,0.95);
       border-radius: 24px;
       padding: 10px 10px 10px 20px;
-      box-shadow:
-        0 0 0 0 rgba(0,51,198,0),
-        0 12px 40px rgba(0,0,0,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.9);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.9);
       transition: all 0.3s var(--ease-smooth);
     }
-
     .input-bar:focus-within {
       border-color: rgba(0,51,198,0.35);
-      box-shadow:
-        0 0 0 4px rgba(0,51,198,0.08),
-        0 16px 48px rgba(0,51,198,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.95);
+      box-shadow: 0 0 0 4px rgba(0,51,198,0.08), 0 16px 48px rgba(0,51,198,0.12), inset 0 1px 0 rgba(255,255,255,0.95);
     }
 
     .input-field {
-      flex: 1;
-      border: none;
-      outline: none;
-      background: transparent;
+      flex: 1; border: none; outline: none; background: transparent;
       font-family: 'Roboto', sans-serif;
-      font-size: 15px;
-      font-weight: 400;
-      color: var(--gcb-dark);
-      resize: none;
-      max-height: 120px;
-      line-height: 1.5;
-      padding: 4px 0;
+      font-size: 15px; font-weight: 400; color: var(--cb-dark);
+      resize: none; max-height: 120px; line-height: 1.5; padding: 4px 0;
     }
-
-    .input-field::placeholder {
-      color: var(--gcb-muted);
-      opacity: 0.7;
-    }
-
-    .input-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .input-field::placeholder { color: var(--cb-muted); opacity: 0.7; }
 
     .input-action-btn {
       width: 36px; height: 36px;
-      border: none;
-      border-radius: 10px;
-      background: transparent;
-      color: var(--gcb-muted);
+      border: none; border-radius: 10px;
+      background: transparent; color: var(--cb-muted);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       transition: all 0.2s;
     }
-
-    .input-action-btn:hover {
-      background: rgba(0,51,198,0.08);
-      color: var(--gcb-blue);
-    }
+    .input-action-btn:hover { background: rgba(0,51,198,0.08); color: var(--cb-blue); }
 
     .send-btn {
       width: 40px; height: 40px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--gcb-blue), #1A4DFF);
-      color: var(--gcb-white);
+      border: none; border-radius: 12px;
+      background: var(--cb-yellow);
+      color: var(--cb-dark);
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
       transition: all 0.25s var(--ease-spring);
-      box-shadow: 0 4px 12px rgba(0,51,198,0.3);
+      box-shadow: 0 4px 12px rgba(255,209,0,0.35);
     }
+    .send-btn:hover { transform: scale(1.08); box-shadow: 0 6px 20px rgba(255,209,0,0.5); }
+    .send-btn:active { transform: scale(0.93); }
 
-    .send-btn:hover {
-      transform: scale(1.08);
-      box-shadow: 0 6px 20px rgba(0,51,198,0.4);
-    }
-
-    .send-btn:active {
-      transform: scale(0.93);
-    }
-
-    /* ──────────────────────────────────────────────
-       CATEGORIES SCROLL — APPLE STYLE
-    ────────────────────────────────────────────── */
-    .categories-section {
-      width: 100%;
-      max-width: 900px;
-      animation: hero-enter 0.8s var(--ease-spring) 0.3s both;
-    }
+    /* ── CATEGORIES ── */
+    .categories-section { width: 100%; max-width: 900px; animation: hero-enter 0.8s var(--ease-spring) 0.3s both; }
 
     .section-label {
       font-family: 'Urbanist', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--gcb-muted);
-      margin-bottom: 12px;
-      padding-left: 4px;
+      font-size: 13px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--cb-muted); margin-bottom: 12px; padding-left: 4px;
     }
 
     .categories-scroll {
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
+      display: flex; gap: 10px; overflow-x: auto;
       padding-bottom: 8px;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
-
     .categories-scroll::-webkit-scrollbar { display: none; }
 
     .cat-item {
       flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
       cursor: pointer;
       transition: all 0.25s var(--ease-spring);
     }
@@ -862,100 +588,70 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255,255,255,0.95);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-size: 28px;
       box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       transition: all 0.25s var(--ease-spring);
     }
-
     .cat-item:hover .cat-icon-wrap {
-      background: var(--gcb-blue);
+      background: var(--cb-yellow);
       transform: scale(1.12) translateY(-4px);
-      box-shadow: 0 10px 28px rgba(0,51,198,0.25);
+      box-shadow: 0 10px 28px rgba(255,209,0,0.35);
     }
 
     .cat-label {
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--gcb-muted);
-      text-align: center;
-      max-width: 64px;
-      transition: color 0.2s;
+      font-size: 11px; font-weight: 500;
+      color: var(--cb-muted); text-align: center;
+      max-width: 64px; transition: color 0.2s;
     }
+    .cat-item:hover .cat-label { color: var(--cb-blue); }
 
-    .cat-item:hover .cat-label {
-      color: var(--gcb-blue);
-    }
-
-    /* ──────────────────────────────────────────────
-       FOOTER
-    ────────────────────────────────────────────── */
+    /* ── FOOTER ── */
     .footer {
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
       text-align: center;
       padding: 32px 24px;
-      font-size: 12px;
-      color: var(--gcb-muted);
+      font-size: 12px; color: var(--cb-muted);
     }
-
-    .footer a { color: var(--gcb-blue); text-decoration: none; }
+    .footer a { color: var(--cb-blue); text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
 
-    /* ──────────────────────────────────────────────
-       RESPONSIVE
-    ────────────────────────────────────────────── */
+    /* ── RESPONSIVE ── */
     @media (max-width: 600px) {
       .header { padding: 12px 16px; }
-      .header-nav { gap: 4px; }
       .nav-pill { display: none; }
       .hero { gap: 28px; }
       .products-grid { grid-template-columns: repeat(2, 1fr); }
       .hero-title { letter-spacing: -1.5px; }
     }
-
-    /* ──────────────────────────────────────────────
-       SCROLL FADE OUT  — orbs muted on scroll
-    ────────────────────────────────────────────── */
-    .chat-active .orb { opacity: 0.12; }
-
-    /* ──────────────────────────────────────────────
-       DIVIDER
-    ────────────────────────────────────────────── */
-    .section-divider {
-      width: 100%;
-      max-width: 780px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gcb-border), transparent);
-      margin: 8px 0;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- BG ORBS -->
   <div class="bg-orbs" aria-hidden="true">
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
   </div>
 
-  <!-- ── HEADER ── -->
+  <!-- HEADER -->
   <header class="header">
     <a href="#" class="header-logo">
-      <!-- Ponto Frio Logo Mark (inline SVG) -->
-      <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="36" height="36" rx="10" fill="#0033C6"/>
-        <circle cx="18" cy="15" r="6" fill="white"/>
-        <circle cx="18" cy="15" r="3" fill="#E31233"/>
-        <rect x="10" y="23" width="16" height="2.5" rx="1.25" fill="white" opacity="0.9"/>
-        <rect x="13" y="27" width="10" height="2" rx="1" fill="white" opacity="0.5"/>
+      <!-- Casas Bahia house logo mark -->
+      <svg class="logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="38" height="38" rx="10" fill="#0033C6"/>
+        <!-- Telhado da casa -->
+        <path d="M7 19L19 8L31 19" stroke="#FFD100" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Paredes -->
+        <rect x="11" y="19" width="16" height="11" rx="1" fill="#FFD100"/>
+        <!-- Porta -->
+        <rect x="16" y="23" width="6" height="7" rx="1" fill="#0033C6"/>
+        <!-- Janelas -->
+        <rect x="12.5" y="21" width="3.5" height="3.5" rx="0.5" fill="#0033C6"/>
+        <rect x="22" y="21" width="3.5" height="3.5" rx="0.5" fill="#0033C6"/>
       </svg>
       <div class="logo-wordmark">
-        <span>Ponto</span><span>Frio</span>
+        <span>Casas Bahia</span>
       </div>
     </a>
 
@@ -973,14 +669,13 @@
     </nav>
   </header>
 
-  <!-- ── MAIN ── -->
+  <!-- MAIN -->
   <main class="main" id="main">
 
-    <!-- HERO -->
     <section class="hero" id="hero">
 
       <div class="hero-headline">
-        <div class="hero-eyebrow">Busca com IA · Ponto Frio</div>
+        <div class="hero-eyebrow">Busca com IA · Casas Bahia</div>
         <h1 class="hero-title">
           O que você<br/>
           está procurando<br/>
@@ -991,7 +686,7 @@
         </p>
       </div>
 
-      <!-- SEARCH BAR PRINCIPAL -->
+      <!-- SEARCH PRINCIPAL -->
       <div class="search-container">
         <div class="search-bar" id="searchBar">
           <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1013,26 +708,13 @@
           </button>
         </div>
 
-        <!-- QUICK CHIPS -->
         <div class="quick-chips" id="quickChips">
-          <div class="chip" onclick="setSearch('TV 4K Samsung barata')">
-            <span class="chip-emoji">📺</span> TVs em oferta
-          </div>
-          <div class="chip" onclick="setSearch('Geladeira French Door')">
-            <span class="chip-emoji">❄️</span> Geladeiras
-          </div>
-          <div class="chip" onclick="setSearch('iPhone 15 parcelado')">
-            <span class="chip-emoji">📱</span> Smartphones
-          </div>
-          <div class="chip" onclick="setSearch('Notebook gamer até R$ 4000')">
-            <span class="chip-emoji">💻</span> Notebooks
-          </div>
-          <div class="chip" onclick="setSearch('Ar condicionado 12000 BTUs')">
-            <span class="chip-emoji">🌬️</span> Ar-condicionado
-          </div>
-          <div class="chip" onclick="setSearch('Fogão 5 bocas')">
-            <span class="chip-emoji">🍳</span> Fogões
-          </div>
+          <div class="chip" onclick="setSearch('TV 4K Samsung barata')"><span class="chip-emoji">📺</span> TVs em oferta</div>
+          <div class="chip" onclick="setSearch('Geladeira French Door')"><span class="chip-emoji">❄️</span> Geladeiras</div>
+          <div class="chip" onclick="setSearch('iPhone 15 parcelado')"><span class="chip-emoji">📱</span> Smartphones</div>
+          <div class="chip" onclick="setSearch('Notebook gamer até R$ 4000')"><span class="chip-emoji">💻</span> Notebooks</div>
+          <div class="chip" onclick="setSearch('Ar condicionado 12000 BTUs')"><span class="chip-emoji">🌬️</span> Ar-condicionado</div>
+          <div class="chip" onclick="setSearch('Fogão 5 bocas')"><span class="chip-emoji">🍳</span> Fogões</div>
         </div>
       </div>
 
@@ -1041,57 +723,47 @@
         <p class="section-label">Departamentos</p>
         <div class="categories-scroll">
           <div class="cat-item" onclick="setSearch('TVs e Eletrônicos')">
-            <div class="cat-icon-wrap">📺</div>
-            <span class="cat-label">Eletrônicos</span>
+            <div class="cat-icon-wrap">📺</div><span class="cat-label">Eletrônicos</span>
           </div>
           <div class="cat-item" onclick="setSearch('Eletrodomésticos')">
-            <div class="cat-icon-wrap">🫧</div>
-            <span class="cat-label">Eletrodomésticos</span>
+            <div class="cat-icon-wrap">🫧</div><span class="cat-label">Eletrodomésticos</span>
           </div>
           <div class="cat-item" onclick="setSearch('Smartphone celular')">
-            <div class="cat-icon-wrap">📱</div>
-            <span class="cat-label">Celulares</span>
+            <div class="cat-icon-wrap">📱</div><span class="cat-label">Celulares</span>
           </div>
           <div class="cat-item" onclick="setSearch('Notebook computador')">
-            <div class="cat-icon-wrap">💻</div>
-            <span class="cat-label">Informática</span>
+            <div class="cat-icon-wrap">💻</div><span class="cat-label">Informática</span>
           </div>
           <div class="cat-item" onclick="setSearch('Ar condicionado')">
-            <div class="cat-icon-wrap">❄️</div>
-            <span class="cat-label">Ar-condicionado</span>
+            <div class="cat-icon-wrap">❄️</div><span class="cat-label">Ar-condicionado</span>
           </div>
           <div class="cat-item" onclick="setSearch('Móveis sala quarto')">
-            <div class="cat-icon-wrap">🛋️</div>
-            <span class="cat-label">Móveis</span>
+            <div class="cat-icon-wrap">🛋️</div><span class="cat-label">Móveis</span>
           </div>
           <div class="cat-item" onclick="setSearch('Áudio fone caixa de som')">
-            <div class="cat-icon-wrap">🎵</div>
-            <span class="cat-label">Áudio</span>
+            <div class="cat-icon-wrap">🎵</div><span class="cat-label">Áudio</span>
           </div>
           <div class="cat-item" onclick="setSearch('Câmera fotográfica')">
-            <div class="cat-icon-wrap">📷</div>
-            <span class="cat-label">Câmeras</span>
+            <div class="cat-icon-wrap">📷</div><span class="cat-label">Câmeras</span>
           </div>
           <div class="cat-item" onclick="setSearch('Games videogame')">
-            <div class="cat-icon-wrap">🎮</div>
-            <span class="cat-label">Games</span>
+            <div class="cat-icon-wrap">🎮</div><span class="cat-label">Games</span>
           </div>
           <div class="cat-item" onclick="setSearch('Saúde beleza')">
-            <div class="cat-icon-wrap">💆</div>
-            <span class="cat-label">Saúde</span>
+            <div class="cat-icon-wrap">💆</div><span class="cat-label">Saúde</span>
           </div>
         </div>
       </div>
 
     </section>
 
-    <!-- FEED DE CONVERSA (oculto inicialmente) -->
+    <!-- FEED -->
     <div class="feed" id="feed" style="display:none;"></div>
 
-    <!-- INPUT STICKY (oculto inicialmente) -->
+    <!-- INPUT STICKY -->
     <div class="input-sticky" id="inputSticky" style="display:none;">
       <div class="input-bar">
-        <button class="input-action-btn" title="Filtros" onclick="openFilters()">
+        <button class="input-action-btn" title="Filtros">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="4" y1="6" x2="20" y2="6"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="11" y1="18" x2="13" y2="18"/>
           </svg>
@@ -1104,7 +776,7 @@
           onkeydown="handleChatKey(event)"
           oninput="autoResize(this)"
         ></textarea>
-        <div class="input-actions">
+        <div style="display:flex;align-items:center;gap:6px;">
           <button class="send-btn" onclick="handleChatSend()">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
@@ -1116,159 +788,152 @@
 
   </main>
 
-  <!-- ── FOOTER ── -->
   <footer class="footer">
-    <p>© 2025 Ponto Frio — Grupo Casas Bahia &nbsp;·&nbsp;
+    <p>© 2025 Casas Bahia — Grupo Casas Bahia &nbsp;·&nbsp;
       <a href="#">Política de privacidade</a> &nbsp;·&nbsp;
       <a href="#">Termos de uso</a>
     </p>
   </footer>
 
-
   <script>
-    /* ──────────────────────────────────────────────
-       DEMO DATA — PRODUTOS PONTOFRIO
-    ────────────────────────────────────────────── */
+    /* ── PRODUTOS CASAS BAHIA ── */
     const DEMO_PRODUCTS = {
       tv: [
         {
-          name: 'Smart TV Samsung 55" 4K QLED TQ55Q60DAGXZD',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1599887801?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 2.799,00',
+          name: 'Smart TV Samsung 55" 4K Crystal UHD UN55DU7700',
+          img: 'https://imgs.casasbahia.com.br/55067773/1g.jpg',
+          price: 'R$ 2.699,05',
           old: 'R$ 3.499,00',
-          installment: '12x de R$ 233,25 s/juros',
-          badge: '20% OFF',
-          url: 'https://www.pontofrio.com.br/televisores/'
+          installment: '12x de R$ 224,92 s/juros',
+          badge: '23% OFF',
+          url: 'https://www.casasbahia.com.br/televisores/smart-tv/'
         },
         {
-          name: 'Smart TV LG 55" 4K NanoCell 55NANO77',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1564047547?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 2.499,00',
-          old: 'R$ 3.199,00',
-          installment: '12x de R$ 208,25 s/juros',
+          name: 'Smart TV LG 55" OLED evo C3 OLED55C3PSA',
+          img: 'https://imgs.casasbahia.com.br/55059869/1g.jpg',
+          price: 'R$ 4.999,05',
+          old: 'R$ 6.999,00',
+          installment: '12x de R$ 416,58 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/televisores/'
+          url: 'https://www.casasbahia.com.br/televisores/'
         },
         {
-          name: 'Smart TV TCL 65" 4K QLED C655 Google TV',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1602012895?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 3.299,00',
+          name: 'Smart TV TCL 65" QLED 4K C655 Google TV',
+          img: 'https://imgs.casasbahia.com.br/55065321/1g.jpg',
+          price: 'R$ 3.199,05',
           old: 'R$ 4.199,00',
-          installment: '12x de R$ 274,92 s/juros',
-          badge: '21% OFF',
-          url: 'https://www.pontofrio.com.br/televisores/'
+          installment: '12x de R$ 266,58 s/juros',
+          badge: '24% OFF',
+          url: 'https://www.casasbahia.com.br/televisores/'
         },
         {
           name: 'Smart TV Philips 50" 4K Ambilight 50PUG7908',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1574810293?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 1.899,00',
+          img: 'https://imgs.casasbahia.com.br/55051629/1g.jpg',
+          price: 'R$ 1.899,05',
           old: 'R$ 2.499,00',
-          installment: '10x de R$ 189,90 s/juros',
+          installment: '10x de R$ 189,91 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/televisores/'
+          url: 'https://www.casasbahia.com.br/televisores/'
         }
       ],
       geladeira: [
         {
-          name: 'Geladeira Consul 410L Frost Free CRM50HB',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1553004476?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 3.199,00',
+          name: 'Geladeira Consul 410L Frost Free Evox CRM50HB',
+          img: 'https://imgs.casasbahia.com.br/55029847/1g.jpg',
+          price: 'R$ 3.099,05',
           old: 'R$ 3.899,00',
-          installment: '12x de R$ 266,58 s/juros',
-          badge: '18% OFF',
-          url: 'https://www.pontofrio.com.br/geladeiras-e-refrigeradores/'
+          installment: '12x de R$ 258,25 s/juros',
+          badge: '21% OFF',
+          url: 'https://www.casasbahia.com.br/geladeiras-e-refrigeradores/'
         },
         {
           name: 'Geladeira Samsung 460L French Door RF46A9013S9',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1577748622?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 5.999,00',
+          img: 'https://imgs.casasbahia.com.br/55036741/1g.jpg',
+          price: 'R$ 5.799,05',
           old: 'R$ 7.499,00',
-          installment: '12x de R$ 499,92 s/juros',
+          installment: '12x de R$ 483,25 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/geladeiras-e-refrigeradores/'
+          url: 'https://www.casasbahia.com.br/geladeiras-e-refrigeradores/'
         },
         {
-          name: 'Geladeira Brastemp 375L Ative! BRM44HK',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1548613011?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 2.799,00',
-          old: 'R$ 3.299,00',
-          installment: '12x de R$ 233,25 s/juros',
+          name: 'Geladeira Brastemp 375L Inverse BRY59 Inox',
+          img: 'https://imgs.casasbahia.com.br/55044201/1g.jpg',
+          price: 'R$ 2.899,05',
+          old: 'R$ 3.499,00',
+          installment: '12x de R$ 241,59 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/geladeiras-e-refrigeradores/'
+          url: 'https://www.casasbahia.com.br/geladeiras-e-refrigeradores/'
         }
       ],
       notebook: [
         {
-          name: 'Notebook Samsung Galaxy Book3 360 Intel i7 16GB 512GB',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1600225019?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 3.799,00',
-          old: 'R$ 4.899,00',
-          installment: '12x de R$ 316,58 s/juros',
-          badge: '22% OFF',
-          url: 'https://www.pontofrio.com.br/informatica/notebooks/'
+          name: 'Notebook Samsung Galaxy Book4 Intel i5 8GB 256GB',
+          img: 'https://imgs.casasbahia.com.br/55064712/1g.jpg',
+          price: 'R$ 2.999,05',
+          old: 'R$ 3.899,00',
+          installment: '12x de R$ 249,92 s/juros',
+          badge: '23% OFF',
+          url: 'https://www.casasbahia.com.br/informatica/notebooks/'
         },
         {
-          name: 'Notebook Lenovo IdeaPad 3 Ryzen 5 8GB 512GB SSD',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1589009887?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 2.499,00',
-          old: 'R$ 3.099,00',
-          installment: '12x de R$ 208,25 s/juros',
+          name: 'Notebook Lenovo IdeaPad 3i Ryzen 5 8GB 512GB SSD',
+          img: 'https://imgs.casasbahia.com.br/55052398/1g.jpg',
+          price: 'R$ 2.399,05',
+          old: 'R$ 2.999,00',
+          installment: '12x de R$ 199,92 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/informatica/notebooks/'
+          url: 'https://www.casasbahia.com.br/informatica/notebooks/'
         },
         {
-          name: 'Notebook Dell Inspiron 15 Intel i5 16GB 512GB SSD',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1597088654?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 3.199,00',
-          old: 'R$ 3.799,00',
-          installment: '12x de R$ 266,58 s/juros',
+          name: 'Notebook Acer Aspire 5 Intel i5 12GB 512GB SSD',
+          img: 'https://imgs.casasbahia.com.br/55058913/1g.jpg',
+          price: 'R$ 3.499,05',
+          old: 'R$ 4.299,00',
+          installment: '12x de R$ 291,59 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/informatica/notebooks/'
+          url: 'https://www.casasbahia.com.br/informatica/notebooks/'
         }
       ],
       default: [
         {
-          name: 'Smartphone Samsung Galaxy A55 5G 256GB',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1602109695?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 1.999,00',
+          name: 'Smartphone Samsung Galaxy A55 5G 256GB Preto',
+          img: 'https://imgs.casasbahia.com.br/55063921/1g.jpg',
+          price: 'R$ 1.899,05',
           old: 'R$ 2.599,00',
-          installment: '12x de R$ 166,58 s/juros',
-          badge: '23% OFF',
-          url: 'https://www.pontofrio.com.br/celulares-e-smartphones/'
+          installment: '12x de R$ 158,25 s/juros',
+          badge: '27% OFF',
+          url: 'https://www.casasbahia.com.br/celulares-e-smartphones/'
         },
         {
-          name: 'Headphone JBL Tune 770NC Bluetooth ANC',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1597620682?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 499,00',
+          name: 'Headphone JBL Tune 770NC Bluetooth Preto',
+          img: 'https://imgs.casasbahia.com.br/55051841/1g.jpg',
+          price: 'R$ 479,05',
           old: 'R$ 699,00',
-          installment: '6x de R$ 83,17 s/juros',
+          installment: '6x de R$ 79,84 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/audio/'
+          url: 'https://www.casasbahia.com.br/audio/'
         },
         {
           name: 'Micro-ondas Brastemp 32L BMJ45 Inox',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1548612829?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 699,00',
+          img: 'https://imgs.casasbahia.com.br/55022618/1g.jpg',
+          price: 'R$ 679,05',
           old: 'R$ 899,00',
-          installment: '10x de R$ 69,90 s/juros',
-          badge: '22% OFF',
-          url: 'https://www.pontofrio.com.br/micro-ondas/'
+          installment: '10x de R$ 67,91 s/juros',
+          badge: '24% OFF',
+          url: 'https://www.casasbahia.com.br/micro-ondas/'
         },
         {
-          name: 'Aspirador Robô Xiaomi Robot Vacuum X10+',
-          img: 'https://imgs.pontofrio.com.br/is/image/GrupoGPA/1602078127?wid=200&hei=200&fit=fit,1&fmt=jpg',
-          price: 'R$ 2.199,00',
+          name: 'Ar Condicionado Split Samsung WindFree 12000 BTU',
+          img: 'https://imgs.casasbahia.com.br/55047312/1g.jpg',
+          price: 'R$ 2.399,05',
           old: 'R$ 2.999,00',
-          installment: '12x de R$ 183,25 s/juros',
+          installment: '12x de R$ 199,92 s/juros',
           badge: null,
-          url: 'https://www.pontofrio.com.br/aspiradores-de-po/'
+          url: 'https://www.casasbahia.com.br/ar-condicionado/'
         }
       ]
     };
 
-    /* ──────────────────────────────────────────────
-       RESPONSES
-    ────────────────────────────────────────────── */
     function pickProducts(query) {
       const q = query.toLowerCase();
       if (q.includes('tv') || q.includes('televisão') || q.includes('televisor')) return DEMO_PRODUCTS.tv;
@@ -1278,18 +943,14 @@
     }
 
     function buildBotText(query) {
-      const q = query.toLowerCase();
-      const greetings = [
-        `Encontrei ótimas opções para "${query}". Selecionei os produtos com melhor custo-benefício e disponibilidade imediata:`,
-        `Aqui estão os melhores resultados para "${query}" com condições especiais:`,
-        `Boa escolha! Para "${query}", separei as opções mais avaliadas e com melhor preço:`
+      const opts = [
+        `Encontrei ótimas opções para "${query}". Aqui estão os produtos com melhor custo-benefício:`,
+        `Olha o que separei para "${query}" com as melhores condições de pagamento:`,
+        `Para "${query}", selecionei os mais bem avaliados e com estoque disponível:`
       ];
-      return greetings[Math.floor(Math.random() * greetings.length)];
+      return opts[Math.floor(Math.random() * opts.length)];
     }
 
-    /* ──────────────────────────────────────────────
-       DOM HELPERS
-    ────────────────────────────────────────────── */
     function addMessage(type, html) {
       const feed = document.getElementById('feed');
       const el = document.createElement('div');
@@ -1308,7 +969,7 @@
             <img
               src="${p.img}"
               alt="${p.name}"
-              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f0f0f0%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2230%22>📦</text></svg>'"
+              onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%23f5f5f7%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 font-size=%2230%22>📦</text></svg>'"
             />
           </div>
           <div class="card-body">
@@ -1329,10 +990,11 @@
         <div class="msg-bot-header">
           <div class="bot-avatar">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
             </svg>
           </div>
-          <span class="bot-name">Ponto Frio IA</span>
+          <span class="bot-name">Casas Bahia IA</span>
         </div>
         <div class="msg-bot-text">${text}</div>
         <div class="products-grid" style="margin-top:14px;">
@@ -1350,10 +1012,11 @@
         <div class="msg-bot-header">
           <div class="bot-avatar">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
             </svg>
           </div>
-          <span class="bot-name">Ponto Frio IA</span>
+          <span class="bot-name">Casas Bahia IA</span>
         </div>
         <div class="typing-indicator">
           <div class="typing-dot"></div>
@@ -1366,9 +1029,6 @@
       return el;
     }
 
-    /* ──────────────────────────────────────────────
-       MAIN FLOWS
-    ────────────────────────────────────────────── */
     function activateChatMode() {
       document.getElementById('hero').style.display = 'none';
       document.getElementById('feed').style.display = 'flex';
@@ -1392,14 +1052,8 @@
 
     function runQuery(query) {
       activateChatMode();
-
-      // Mensagem do usuário
       addMessage('user', query);
-
-      // Typing
       const typing = showTyping();
-
-      // Simula latência de IA
       setTimeout(() => {
         typing.remove();
         const products = pickProducts(query);
@@ -1414,10 +1068,7 @@
     }
 
     function handleChatKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleChatSend();
-      }
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleChatSend(); }
     }
 
     function autoResize(el) {
@@ -1425,11 +1076,6 @@
       el.style.height = Math.min(el.scrollHeight, 120) + 'px';
     }
 
-    function openFilters() {
-      alert('Filtros: em desenvolvimento 🔧');
-    }
-
-    // Enter no search principal
     document.getElementById('searchInput').addEventListener('keydown', function(e) {
       if (e.key === 'Enter') handleSearch();
     });
